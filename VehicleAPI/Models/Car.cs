@@ -2,7 +2,7 @@
 {
     public class Car : Vehicle
     {
-        public bool headlightsOn {  get; set; }
-        int wheels { get; set; }
+        public bool HeadlightsOn {  get; set; }
+        public int wheels { get; set; }
     }
 }
