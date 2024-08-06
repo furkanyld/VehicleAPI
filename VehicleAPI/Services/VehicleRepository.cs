@@ -1,33 +1,32 @@
-﻿using VehicleAPI.Models;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using VehicleAPI.VehicleDb;
-using VehicleAPI.Data.SeedData;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+using VehicleAPI.Models;
+using VehicleAPI.VehicleDb;
 
 namespace VehicleAPI.Services
 {
     public class VehicleRepository : IVehicleRepository
     {
         private readonly VehicleDbContext _context;
+
         public VehicleRepository(VehicleDbContext context) 
         {
             _context = context;
             
         }
-        public async Task DeleteCar(int id)
-        {
-                var car = await _context.Cars.FindAsync(id);
 
-                if (car == null)
-                {
-                    return null;
-                }
-                _context.Cars.Remove(car);
-                await _context.SaveChangesAsync();
+        public async Task<Car> DeleteCar(int id)
+        {
+             var car = await _context.Cars.FindAsync(id);
+
+             if (car == null)
+             {
+                throw new Exception();
+             }
+
+             _context.Cars.Remove(car);
+             await _context.SaveChangesAsync();
+            return car;
         }
 
         public async Task<Car> GetCarById(int id)
@@ -42,7 +41,7 @@ namespace VehicleAPI.Services
             return car;
         }
 
-        public async Task<Car> TurnHeadlights(int id, bool state)
+        public async Task<Car> TurnHeadlights(int id)
         {
             var car = await _context.Cars.FindAsync(id);
             
@@ -50,8 +49,14 @@ namespace VehicleAPI.Services
             {
                 return null;
             }
-
-            car.HeadlightsOn = state;
+            if (car.HeadlightsOn == true)
+            {
+                car.HeadlightsOn = false;
+            }
+            else
+            {
+                car.HeadlightsOn = true;
+            }
             await _context.SaveChangesAsync();
             return car;
         }
@@ -86,7 +91,7 @@ namespace VehicleAPI.Services
                 return new List<Car>();
             }
             return await _context.Cars
-                .Where(c => c.Color.ToLower() == color.ToLower())
+                .Where(c => c.Color.Contains(color))
                 .ToListAsync();
         }
     }

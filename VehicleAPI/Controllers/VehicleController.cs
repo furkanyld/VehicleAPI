@@ -43,17 +43,17 @@ namespace VehicleAPI.Controllers
         }
 
         [HttpPut("TurnHeadlights/{id}")]
-        public async Task<ActionResult<Car>> TurnHeadlights(int id, bool state)
+        public async Task<ActionResult<Car>> TurnHeadlights(int id)
         {
-            var car = await _repository.TurnHeadlights(id, state);
+            var car = await _repository.TurnHeadlights(id);
             return Ok(car);
         }
 
         [HttpDelete("DeleteCar/{id}")]
-        public IActionResult DeleteCar(int id)
+        public async Task<Car> DeleteCar(int id)
         {
-             _repository.DeleteCar(id);
-             return NoContent();
+            var deletedCar = await _repository.DeleteCar(id);
+            return deletedCar;
         }
     }
 }

@@ -9,11 +9,11 @@ namespace VehicleAPI.Data.SeedData
         public void Configure(EntityTypeBuilder<Car> builder)
         {
             builder.HasData(
-                new Car { Id = 1, Color = "Red", HeadlightsOn = false },
-                new Car { Id = 2, Color = "Blue", HeadlightsOn = false },
-                new Car { Id = 3, Color = "Grey", HeadlightsOn = false },
-                new Car { Id = 4, Color = "White", HeadlightsOn = false },
-                new Car { Id = 5, Color = "Orange", HeadlightsOn = false });
+                new Car { Id = 1, Color = "Red", HeadlightsOn = false, wheels = 4 },
+                new Car { Id = 2, Color = "Blue", HeadlightsOn = false, wheels = 4 },
+                new Car { Id = 3, Color = "Grey", HeadlightsOn = false, wheels = 4 },
+                new Car { Id = 4, Color = "White", HeadlightsOn = false, wheels = 4 },
+                new Car { Id = 5, Color = "Orange", HeadlightsOn = false, wheels = 4 });
         }
     }
 }
