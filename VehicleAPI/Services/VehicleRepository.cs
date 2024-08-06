@@ -15,6 +15,13 @@ namespace VehicleAPI.Services
             
         }
 
+        public async Task<Car> CreateCar(Car car)
+        {
+            await _context.Cars.AddAsync(car);
+            await _context.SaveChangesAsync();
+            return car;
+        }
+
         public async Task<Car> DeleteCar(int id)
         {
              var car = await _context.Cars.FindAsync(id);

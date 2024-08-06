@@ -8,6 +8,7 @@ namespace VehicleAPI.Services
         Task<IEnumerable<Car>> SelectCarsByColor(string color);
         Task<IEnumerable<Bus>> SelectBusesByColor(string color);
         Task<IEnumerable<Boat>> SelectBoatsByColor(string color);
+        Task<Car> CreateCar(Car car);
         Task<Car> GetCarById(int id);
         Task<Car> TurnHeadlights(int id);
         Task<Car> DeleteCar(int id);

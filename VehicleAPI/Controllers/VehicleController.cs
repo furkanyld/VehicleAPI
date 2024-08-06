@@ -35,6 +35,13 @@ namespace VehicleAPI.Controllers
             return Ok(selectedBoats);
         }
 
+        [HttpPut("CreateCar")]
+        public async Task<ActionResult<Car>> CreateCar(Car car)
+        {
+            await _repository.CreateCar(car);
+            return Ok(car);
+        }
+
         [HttpGet("GetCarById/{id}")]
         public async Task<ActionResult<Car>> GetCarById(int id)
         {
